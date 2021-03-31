@@ -19,11 +19,10 @@ class PerchFieldType_frwssr_clonepage extends PerchAPI_FieldType
     {
         $ftPath = PERCH_LOGINPATH . '/addons/fieldtypes/frwssr_clonepage/';
         $perch = Perch::fetch();
-        $perch->add_javascript($ftPath . 'init.js?v=0.1.0');
+        $perch->add_javascript($ftPath . 'init.js?v=0.0.3');
 
         $id = $this->Tag->input_id();
         $buttontext = $this->Tag->buttontext() ? $this->Tag->buttontext() : '✌️ Clone page ⚠️';
-        // $renamefield = $this->Tag->renamefield() ? ' data-renamefield="' . $this->Tag->renamefield() . '"': '';
         $renamepostfix = $this->Tag->renamepostfix() ? ' data-renamepostfix="' . $this->Tag->renamepostfix() . '"' : ' data-renamepostfix="-copy"';
         $buttonbg = $this->Tag->buttonbg() ? ' style="background: ' . $this->Tag->buttonbg() . '"' : ' style="background: slategray"';
 

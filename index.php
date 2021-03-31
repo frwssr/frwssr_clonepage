@@ -41,6 +41,7 @@
             $uriparts = pathinfo($page->pagePath());
 
             $newFileName = $uriparts['filename'] . $renamepostfix;
+            $originalIsIndex = $uriparts['filename'] == 'index' ? true : false;
             $newFilePath = $uriparts['dirname'] . '/' . $newFileName . '.' . $uriparts['extension'];
 
             // If a file with the “new” name already exists under the given path, apply postfix to the new filename again
@@ -71,6 +72,12 @@
             $newPageDetails['pageParentID'] = !$newPageDetails['pageParentID'] ? $id : $newPageDetails['pageParentID'];
             // Update filepath in new page details
             $newPageDetails['pagePath'] = $newFilePath;
+
+            $newPageDetails['pageSortPath'] = '/' . $newFileName;
+            // Update pageDepth in new page details if original is index
+            $newPageDetails['pageDepth'] = $originalIsIndex ? (int) $newPageDetails['pageDepth'] + 1 : $newPageDetails['pageDepth'];
+            // Update tree position in new page details if original is index
+            $newPageDetails['pageTreePosition'] = $originalIsIndex ? $newPageDetails['pageTreePosition'] . '-001' : $newPageDetails['pageTreePosition'];
             // Update page title and navigation text in new page details
             $newPageDetails['pageTitle'] .= $titlepostfix;
             $newPageDetails['pageNavText'] .= $titlepostfix;
@@ -80,6 +87,12 @@
             $newPageDetails['pageModified'] = date('Y-m-d H:i:s');
 
             // New page will not be associated with any navigation groups, to prevent it from showing up accidentally
+
+            foreach($newPageDetails as $key => $value) {
+                if(strpos($key, 'page') !== 0 && strpos($key, 'template') !== 0) {
+                    unset($newPageDetails[$key]);
+                }
+            }
 
             $newPage = $pagesFactory->create( $newPageDetails );
             if( is_object($newPage) ) { // created successfully
