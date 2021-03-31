@@ -16,7 +16,7 @@ In a Perch attributes template (e.g. `perch/templates/pages/attributes/seo.html`
 ### Attributes
 - *buttontext* - Customize the text on the button. Defaults to “✌️ Clone page ⚠️” (—the emoji trying to signify the *danger zone* character of the button.)
 - *buttonbg* - Customize the background of the button. Defaults to `slategray`. You might get fancy with something like `buttonbg="linear-gradient(to top right, teal, tomato)"`, too. Impress your Perch users!
-- *renamepostfix* - Customize the text appended to the field passed with `renamefield`. Will do nothing, if `renamefield` is not present. Defaults to “ (Copy)”.
+- *renamepostfix* - Customize the text appended to the *Page title* and the *Navigation text*. Defaults to “ (Copy)”. A slugified version of the `renamepostfix` will be appended to the clone’s filename, too.
 
 ### Example
 ```html
@@ -30,7 +30,8 @@ In a Perch attributes template (e.g. `perch/templates/pages/attributes/seo.html`
 - The filename will be a product of the original page’s filename and a (predefined or custom) postfix. To keep URLs clean, you will have to use the standard processes in Perch to rename and move the file.
 - If you are creating a slug in any of the content items, the slug field in the cloned page’s item will hold the exact same value as the original. You need to update that manually. (Unfortunately, there is no way to automate this.)
 - Cloning pages will work best on pages, utilising a generic master page with region names like `banner`, `contents`, and such. Otherwise you might end up with multiple pages holding a region called `news`, for instance.
-- This fieldtype was developed under Perch (Standard) Version 3.1.7 on a server running PHP 7.4.x. **Use at own risk!**
+- This fieldtype was developed under Perch (Standard) Version 3.1.7 on a server running PHP 7.4.x.  
+**Use at own risk!**
 
 
 # License
