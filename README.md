@@ -10,7 +10,7 @@ Field type to clone a (somewhat standard) page and its contents in [PerchCMS](ht
 ## Usage
 In a Perch attributes template (e.g. `perch/templates/pages/attributes/seo.html`), you can use this field type as follows:
 ```html
-<perch:content id="clone" type="frwssr_clonepage" suppress>
+<perch:pages id="clone" type="frwssr_clonepage" suppress>
 ```
 
 ### Attributes
@@ -20,7 +20,7 @@ In a Perch attributes template (e.g. `perch/templates/pages/attributes/seo.html`
 
 ### Example
 ```html
-<perch:content id="clone" type="frwssr_clonepage" buttontext="Make a copy of this awesome page" buttonbg="linear-gradient(to top right, teal, tomato)" renamepostfix="—copy" suppress>
+<perch:pages id="clone" type="frwssr_clonepage" buttontext="Make a copy of this awesome page" buttonbg="linear-gradient(to top right, teal, tomato)" renamepostfix="—copy" suppress>
 ```
 
 ### Notes
