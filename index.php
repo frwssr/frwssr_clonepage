@@ -42,15 +42,18 @@
 
             $newFileName = $uriparts['filename'] . $renamepostfix;
             $originalIsIndex = $uriparts['filename'] == 'index' ? true : false;
-            $newFilePath = $uriparts['dirname'] . '/' . $newFileName . '.' . $uriparts['extension'];
+            $originalIsHome = $originalIsIndex && $uriparts['dirname'] == '/' ? true : false;
+            $newFilePath = !$originalIsHome ? $uriparts['dirname'] : '';
+            $newFilePath .= '/' . $newFileName . '.' . $uriparts['extension'];
 
             // If a file with the “new” name already exists under the given path, apply postfix to the new filename again
             while (file_exists($siteroot . $newFilePath)) {
                 $newFileName .= $renamepostfix;
                 $titlepostfix .= $titlepostfix;
-                $newFilePath = $uriparts['dirname'] . '/' . $newFileName . '.' . $uriparts['extension'];
+                $newFilePath = !$originalIsHome ? $uriparts['dirname'] . '/' : '';
+                $newFilePath .= $newFileName . '.' . $uriparts['extension'];
             }
-            
+
             if (!copy($siteroot . '/' . $page->pagePath(), $siteroot . $newFilePath)) {
                 throw new \Exception("Copying " . $page->pagePath() . " failed…\n");
             }
@@ -75,9 +78,9 @@
 
             $newPageDetails['pageSortPath'] = '/' . $newFileName;
             // Update pageDepth in new page details if original is index
-            $newPageDetails['pageDepth'] = $originalIsIndex ? (int) $newPageDetails['pageDepth'] + 1 : $newPageDetails['pageDepth'];
+            $newPageDetails['pageDepth'] = $originalIsIndex && !$originalIsHome ? (int) $newPageDetails['pageDepth'] + 1 : $newPageDetails['pageDepth'];
             // Update tree position in new page details if original is index
-            $newPageDetails['pageTreePosition'] = $originalIsIndex ? $newPageDetails['pageTreePosition'] . '-001' : $newPageDetails['pageTreePosition'];
+            $newPageDetails['pageTreePosition'] = $originalIsIndex && !$originalIsHome ? $newPageDetails['pageTreePosition'] . '-001' : $newPageDetails['pageTreePosition'];
             // Update page title and navigation text in new page details
             $newPageDetails['pageTitle'] .= $titlepostfix;
             $newPageDetails['pageNavText'] .= $titlepostfix;

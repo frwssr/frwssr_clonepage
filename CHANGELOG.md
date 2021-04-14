@@ -17,3 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## v0.0.3 - 2021-03-31
 ### Changed…
 - `index.php` to fix issues with cloning failing on some pages.
+
+## v0.0.4 - 2021-04-14
+### Fixed…
+- …the filepath of a cloned home page, so it does not sport a double slash (‘//’) at its front.
