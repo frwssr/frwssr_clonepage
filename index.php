@@ -35,28 +35,30 @@
             /** @var PerchContent_Page $page */
             $page = $pagesFactory->find($id);
 
-            /** --------------
-            Duplicating the physical PHP file on the server.
-            --------------- */
             $uriparts = pathinfo($page->pagePath());
 
             $newFileName = $uriparts['filename'] . $renamepostfix;
             $originalIsIndex = $uriparts['filename'] == 'index' ? true : false;
             $originalIsHome = $originalIsIndex && $uriparts['dirname'] == '/' ? true : false;
             $newFilePath = !$originalIsHome ? $uriparts['dirname'] : '';
-            $newFilePath .= '/' . $newFileName . '.' . $uriparts['extension'];
+            $newFilePath .= ($uriparts['dirname'] != '/' ? '/' : '') . $newFileName . (isset($uriparts['extension']) ? '.' . $uriparts['extension'] : '');
 
-            // If a file with the “new” name already exists under the given path, apply postfix to the new filename again
-            while (file_exists($siteroot . $newFilePath)) {
-                $newFileName .= $renamepostfix;
-                $titlepostfix .= $titlepostfix;
-                $newFilePath = !$originalIsHome ? $uriparts['dirname'] . '/' : '';
-                $newFilePath .= $newFileName . '.' . $uriparts['extension'];
-            }
+            /** --------------
+            Duplicating the physical PHP file on the server, if applicable.
+            --------------- */
+            // If page is a file and a file with the “new” name already exists under the given path, apply postfix to the new filename again
+            if($uriparts['extension']):
+                while (file_exists($siteroot . $newFilePath)) {
+                    $newFileName .= $renamepostfix;
+                    $titlepostfix .= $titlepostfix;
+                    $newFilePath = !$originalIsHome ? $uriparts['dirname'] . '/' : '';
+                    $newFilePath .= $newFileName . '.' . $uriparts['extension'];
+                }
 
-            if (!copy($siteroot . '/' . $page->pagePath(), $siteroot . $newFilePath)) {
-                throw new \Exception("Copying " . $page->pagePath() . " failed…\n");
-            }
+                if (!copy($siteroot . '/' . $page->pagePath(), $siteroot . $newFilePath)) {
+                    throw new \Exception("Copying " . $page->pagePath() . " failed…\n");
+                }
+            endif;
             /** --------------
             END: Duplicating the physical PHP file on the server.
             --------------- */
@@ -70,6 +72,8 @@
             $newPageDetails = $page->to_array();
             // Purge (pun intended) page id
             unset($newPageDetails['pageID']);
+
+
             // Set pageParentID to the original page’s id,
             // only if the page to be cloned is an index.php (pageParentID = 0, thus “false”). Otherwise keep pageParentID as is
             $newPageDetails['pageParentID'] = !$newPageDetails['pageParentID'] ? $id : $newPageDetails['pageParentID'];
@@ -156,7 +160,7 @@
                     
                     $newItem = $itemsFactory->create( $newItemDetails );
                     if( is_object($newItem) ) { // created successfully
-                        $indices = $DB->get_rows("SELECT * FROM perch3_content_index WHERE itemID = " . $originalItemID . " AND itemRev = " . $originalItemRev);
+                        $indices = $DB->get_rows("SELECT * FROM " . PERCH_DB_PREFIX . "content_index WHERE itemID = " . $originalItemID . " AND itemRev = " . $originalItemRev);
                         foreach ($indices as $index) {
                             $newIndexDetails = $index;
                             unset($newIndexDetails['indexID']);
@@ -165,7 +169,7 @@
                             $newIndexDetails['pageID'] = $newPageID;
                             $newIndexDetails['itemRev'] = 1;
 
-                            if( !$DB->insert('perch3_content_index', $newIndexDetails) ) {
+                            if( !$DB->insert(PERCH_DB_PREFIX . 'content_index', $newIndexDetails) ) {
                                 throw new \Exception('Failed inserting index');
                             }
 

@@ -21,3 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## v0.0.4 - 2021-04-14
 ### Fixed…
 - …the filepath of a cloned home page, so it does not sport a double slash (‘//’) at its front.
+
+## v0.1 - 2022-12-08
+### Fixed…
+- …issue with double slashes (`/`) in front of the page path on level 2 pages.
+- …issue with assuming the database prefix was `perch3_`. Now uses constant `PERCH_DB_PREFIX` to work with different setups.
+### Updated…
+- …to work with physical and virtual pages. Fieldtpe now usable in Perch Runway 4.x, too.

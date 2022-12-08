@@ -31,6 +31,7 @@ In a Perch attributes template (e.g. `perch/templates/pages/attributes/seo.html`
 - If you are creating a slug in any of the content items, the slug field in the cloned page’s item will hold the exact same value as the original. You need to update that manually. (Unfortunately, there is no way to automate this.)
 - Cloning pages will work best on pages, utilising a generic master page with region names like `banner`, `contents`, and such. Otherwise you might end up with multiple pages holding a region called `news`, for instance.
 - This fieldtype was developed under Perch (Standard) Version 3.1.7 on a server running PHP 7.4.x.  
+- Also tested under Perch Runway 4.5 on a server running PHP 8.0.26.  
 **Use at own risk!**
 
 

@@ -5,6 +5,7 @@
  *
  * @package default
  * @author Nils Mielke, FEUERWASSER
+ * @version v0.1 - 2022-12-08
  */
 class PerchFieldType_frwssr_clonepage extends PerchAPI_FieldType
 {
@@ -19,7 +20,7 @@ class PerchFieldType_frwssr_clonepage extends PerchAPI_FieldType
     {
         $ftPath = PERCH_LOGINPATH . '/addons/fieldtypes/frwssr_clonepage/';
         $perch = Perch::fetch();
-        $perch->add_javascript($ftPath . 'init.js?v=0.0.3');
+        $perch->add_javascript($ftPath . 'init.js?v=20221208');
 
         $id = $this->Tag->input_id();
         $buttontext = $this->Tag->buttontext() ? $this->Tag->buttontext() : '✌️ Clone page ⚠️';
