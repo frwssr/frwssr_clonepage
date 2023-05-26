@@ -15,12 +15,12 @@ In a Perch attributes template (e.g. `perch/templates/pages/attributes/seo.html`
 
 ### Attributes
 - *buttontext* - Customize the text on the button. Defaults to “✌️ Clone page ⚠️” (—the emoji trying to signify the *danger zone* character of the button.)
-- *buttonbg* - Customize the styling of the button. Defaults to `slategray`. You might get fancy with something like `buttonbg="linear-gradient(to top right, teal, tomato)"`, too. Impress your Perch users!
+- *buttonbg* - Customize the styling of the button. Defaults to `background: slategray`. You might get fancy with something like `buttonbg="background: linear-gradient(to top right, teal, tomato); float: right;"`, too. Impress your Perch users!
 - *renamepostfix* - Customize the text appended to the *Page title* and the *Navigation text*. Defaults to “ (Copy)”. A slugified version of the `renamepostfix` will be appended to the clone’s filename, too.
 
 ### Example
 ```html
-<perch:pages id="clone" type="frwssr_clonepage" buttontext="Make a copy of this awesome page" buttonbg="linear-gradient(to top right, teal, tomato)" renamepostfix="—copy" suppress>
+<perch:pages id="clone" type="frwssr_clonepage" buttontext="Make a copy of this awesome page" buttonbg="background: linear-gradient(to top right, teal, tomato); float: right;" renamepostfix="—copy" suppress>
 ```
 
 ### Notes
