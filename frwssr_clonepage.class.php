@@ -25,7 +25,7 @@ class PerchFieldType_frwssr_clonepage extends PerchAPI_FieldType
         $id = $this->Tag->input_id();
         $buttontext = $this->Tag->buttontext() ? $this->Tag->buttontext() : '✌️ Clone page ⚠️';
         $renamepostfix = $this->Tag->renamepostfix() ? ' data-renamepostfix="' . $this->Tag->renamepostfix() . '"' : ' data-renamepostfix=" (Copy)"';
-        $buttonbg = $this->Tag->buttonbg() ? ' style="background: ' . $this->Tag->buttonbg() . '"' : ' style="background: slategray"';
+        $buttonbg = $this->Tag->buttonbg() ? ' style="' . $this->Tag->buttonbg() . '"' : ' style="background: slategray"';
 
         $s = $this->Form->text($id, $buttontext, $class='frwssr_clonepage__button button button-simple', $limit=false, $type='submit', $attributes='readonly data-path="' . $ftPath . '"' . $renamepostfix . $buttonbg);
 

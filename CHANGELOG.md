@@ -28,3 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - …issue with assuming the database prefix was `perch3_`. Now uses constant `PERCH_DB_PREFIX` to work with different setups.
 ### Updated…
 - …to work with physical and virtual pages. Fieldtpe now usable in Perch Runway 4.x, too.
+
+## v1.0 - 2023-05-26
+### Fixed…
+- …issue with cloning failing due to custom page attribute fields’ names starting with `page` or `template`.
+- …`README.md` to link to my Mastodon profile (rather than the abandoned Twitter one).
+### Added…
+- …an (albeit rough) error message, for when creation of the new page fails.
+### Updated…
+- …the `buttonbg` attribute to allow for more complex styling of the field. THIS MIGHT BE A BREAKING CHANGE DEPENDING ON YOUR SETUP TO DATE!
+- …the `buttonbg` attribute description in `README.md`.

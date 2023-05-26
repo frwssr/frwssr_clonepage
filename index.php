@@ -94,9 +94,33 @@
             $newPageDetails['pageModified'] = date('Y-m-d H:i:s');
 
             // New page will not be associated with any navigation groups, to prevent it from showing up accidentally
+            $allowedKeys = [
+                'pageParentID',
+                'pagePath',
+                'pageTitle',
+                'pageNavText',
+                'pageNew',
+                'pageOrder',
+                'pageDepth',
+                'pageSortPath',
+                'pageTreePosition',
+                'pageSubpageRoles',
+                'pageSubpagePath',
+                'pageHidden',
+                'pageNavOnly',
+                'pageAccessTags',
+                'pageCreatorID',
+                'pageModified',
+                'pageAttributes',
+                'pageAttributeTemplate',
+                'pageTemplate',
+                'templateID',
+                'pageSubpageTemplates',
+                'pageCollections',
+            ];
 
             foreach($newPageDetails as $key => $value) {
-                if(strpos($key, 'page') !== 0 && strpos($key, 'template') !== 0) {
+                if(!in_array($key, $allowedKeys)) {
                     unset($newPageDetails[$key]);
                 }
             }
@@ -104,6 +128,9 @@
             $newPage = $pagesFactory->create( $newPageDetails );
             if( is_object($newPage) ) { // created successfully
                 $newPageID = $newPage->pageID();
+            } else {
+                echo 'Unable to create new page. Potential cause: Custom field ID starting with “page” or “template”.';
+                exit;
             }
 
             # 2. Page regions

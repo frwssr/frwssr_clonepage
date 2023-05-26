@@ -15,7 +15,7 @@ In a Perch attributes template (e.g. `perch/templates/pages/attributes/seo.html`
 
 ### Attributes
 - *buttontext* - Customize the text on the button. Defaults to “✌️ Clone page ⚠️” (—the emoji trying to signify the *danger zone* character of the button.)
-- *buttonbg* - Customize the background of the button. Defaults to `slategray`. You might get fancy with something like `buttonbg="linear-gradient(to top right, teal, tomato)"`, too. Impress your Perch users!
+- *buttonbg* - Customize the styling of the button. Defaults to `slategray`. You might get fancy with something like `buttonbg="linear-gradient(to top right, teal, tomato)"`, too. Impress your Perch users!
 - *renamepostfix* - Customize the text appended to the *Page title* and the *Navigation text*. Defaults to “ (Copy)”. A slugified version of the `renamepostfix` will be appended to the clone’s filename, too.
 
 ### Example
@@ -45,4 +45,4 @@ If you appreciate the fieldtype and use it regularly, feel free to [buy me some 
 # Issues
 Create a GitHub Issue: https://github.com/frwssr/frwssr_clonepage/issues or better yet become a contributor.
 
-Developer: Nils Mielke (nils.m@feuerwasser.de, [@nilsmielke](https://twitter.com/nilsmielke)) of [FEUERWASSER](https://www.feuerwasser.de)
+Developer: Nils Mielke (nils.m@feuerwasser.de, [@nilsmielke (on Mastodon)](https://det.social/@nilsmielke)) of [FEUERWASSER](https://www.feuerwasser.de)
